@@ -13,8 +13,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-button expand="block" color="tertiary" (click)="addPhoto()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Prendre une photo
+  </ion-button>
+  <ion-button expand="block" color="primary" (click)="openLibrary()">
+    <ion-icon slot="start" name="image"></ion-icon>
+    Ouvrir la bibliotheque
+  </ion-button>
+
+  <ion-button>
+    <img [src]="image">
+  </ion-button>
+
 </ion-content>
