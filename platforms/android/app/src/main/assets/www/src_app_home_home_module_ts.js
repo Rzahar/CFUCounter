@@ -116,12 +116,14 @@ let HomePage = class HomePage {
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
-            sourceType: this.camera.PictureSourceType.CAMERA
+            sourceType: this.camera.PictureSourceType.CAMERA,
+            saveToPhotoAlbum: true,
+            allowEdit: true,
         };
         this.camera.getPicture(options).then((imageData) => {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64 (DATA_URL):
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.base64Image = 'data:image/jpeg;base64,' + imageData;
         }, (err) => {
             // Handle error
         });
@@ -137,7 +139,7 @@ let HomePage = class HomePage {
         this.camera.getPicture(options).then((imageData) => {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64 (DATA_URL):
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.base64Image = 'data:image/jpeg;base64,' + imageData;
         }, (err) => {
             // Handle error
         });
@@ -168,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Blank\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Blank</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"addPhoto()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    Prendre une photo\n  </ion-button>\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\n    Ouvrir la bibliotheque\n  </ion-button>\n\n  <ion-button>\n    <img [src]=\"image\">\n  </ion-button>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Blank\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Blank</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"addPhoto()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    Prendre une photo\n  </ion-button>\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\n    Ouvrir la bibliotheque\n  </ion-button>\n\n  <ion-card>\n    <img [src]=\"base64Image\">\n  </ion-card>\n\n</ion-content>\n");
 
 /***/ }),
 
