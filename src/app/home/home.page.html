@@ -1,19 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title class="content" >
+      Bienvenu sur l'application CFU-Counter v.0.1
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content  [fullscreen]="true">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Que voulez-vous faire ? </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-button expand="block" color="tertiary" (click)="addPhoto()">
+  <ion-button expand="block" color="tertiary" (click)="takePhoto()">
     <ion-icon slot="start" name="camera"></ion-icon>
     Prendre une photo
   </ion-button>
@@ -23,8 +23,10 @@
   </ion-button>
 
   <!-- C'est ici que s'afficherala photo -->
-  <ion-card>
-    <img [src]="base64Image">
+  <ion-card *ngIf="base64Image!= null" class="result">
+
+    <img class="result-content" [src]="base64Image">
+
   </ion-card>
 
 </ion-content>

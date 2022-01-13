@@ -101,47 +101,53 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HomePage = class HomePage {
+    //constructeur camera nécessaire pour faire fonctionner l'appareil photo/librairie
     constructor(camera) {
         this.camera = camera;
     }
-    addPhoto() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            const libraryImage = yield this.takePhoto();
-            this.image = 'data:image/jpeg;base64,' + libraryImage;
-        });
-    }
     takePhoto() {
-        const options = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            saveToPhotoAlbum: true,
-            allowEdit: true,
-        };
-        this.camera.getPicture(options).then((imageData) => {
-            // imageData is either a base64 encoded string or a file URI
-            // If it's base64 (DATA_URL):
-            this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        }, (err) => {
-            // Handle error
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            /**
+             * Fonction spécifique dédiée à la prise de photo via sourceType:this.camera.PictureSourceType.CAMERA
+             */
+            const options = {
+                //Fonctions natives de CameraOption
+                quality: 100,
+                destinationType: this.camera.DestinationType.DATA_URL,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                sourceType: this.camera.PictureSourceType.CAMERA,
+                // On ajoute l'option savetophotoalbum afin que l'utilisateur puisse garder la trace de la photo s'il souhaite la reconsulter
+                saveToPhotoAlbum: true,
+            };
+            this.camera.getPicture(options).then((imageData) => {
+                // imageData is either a base64 encoded string or a file URI
+                // If it's base64 (DATA_URL):
+                this.base64Image = 'data:image/jpeg;base64,' + imageData;
+            }, (err) => {
+                // Handle error
+            });
         });
     }
     openLibrary() {
-        const options = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-        };
-        this.camera.getPicture(options).then((imageData) => {
-            // imageData is either a base64 encoded string or a file URI
-            // If it's base64 (DATA_URL):
-            this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        }, (err) => {
-            // Handle error
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            /**
+             * Fonction spécifique dédiée à la récupération de l'image en bibliothèque via sourceType:This.camera.PictureSourceType.PHOTOLIBRARY
+             */
+            const options = {
+                quality: 100,
+                destinationType: this.camera.DestinationType.DATA_URL,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+            };
+            this.camera.getPicture(options).then((imageData) => {
+                // imageData is either a base64 encoded string or a file URI
+                // If it's base64 (DATA_URL):
+                this.base64Image = 'data:image/jpeg;base64,' + imageData;
+            }, (err) => {
+                // Handle error
+            });
         });
     }
 };
@@ -170,7 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Blank\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Blank</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"addPhoto()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    Prendre une photo\n  </ion-button>\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\n    Ouvrir la bibliotheque\n  </ion-button>\n\n  <ion-card>\n    <img [src]=\"base64Image\">\n  </ion-card>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Blank\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Blank</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"addPhoto()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    Prendre une photo\n  </ion-button>\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\n    Ouvrir la bibliotheque\n  </ion-button>\n\n  <!-- C'est ici que s'afficherala photo -->\n  <ion-card>\n    <img [src]=\"base64Image\">\n  </ion-card>\n\n</ion-content>\n");
 
 /***/ }),
 
