@@ -1,11 +1,21 @@
 <ion-header>
-  <ion-toolbar >
-    <ion-title class="background">Page de connexion </ion-title>
+  <ion-toolbar>
+    <ion-title>Creer un compte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" required></ion-input>
@@ -18,13 +28,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" expand="block">Me connecter</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Mot de passe oublié?</a>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block">M'inscrire</ion-button>
+        <ion-button type="submit" color="danger" expand="block">Valider</ion-button>
       </ion-col>
     </ion-row>
   </form>
