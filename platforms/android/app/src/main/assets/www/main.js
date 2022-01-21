@@ -27,6 +27,14 @@ const routes = [
         redirectTo: 'home',
         pathMatch: 'full'
     },
+    {
+        path: 'login',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+    },
+    {
+        path: 'register',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_register_register_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./register/register.module */ 9204)).then(m => m.RegisterPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
