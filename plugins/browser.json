@@ -33,11 +33,10 @@
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "io.ionic.starter"
-    }
-  },
-  "dependent_plugins": {
+    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
-  }
+  },
+  "dependent_plugins": {}
 }

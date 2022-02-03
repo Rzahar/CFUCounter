@@ -35,6 +35,10 @@ const routes = [
         path: 'register',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_register_register_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./register/register.module */ 9204)).then(m => m.RegisterPageModule)
     },
+    {
+        path: 'crop-test',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_crop-test_crop-test_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./crop-test/crop-test.module */ 5223)).then(m => m.CropTestPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

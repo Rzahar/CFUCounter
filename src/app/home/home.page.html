@@ -13,6 +13,15 @@
     </ion-toolbar>
   </ion-header>
 
+  <hr>
+    <nav>
+     <a [routerLink]="['/']">Accueil </a><br>
+     <a [routerLink]="['/login']">Login </a><br>
+     <a [routerLink]="['/register']">Register </a><br>
+     <a [routerLink]="['/crop-test']">Page de test pour le Crop </a>
+    </nav>
+  <hr>
+
   <ion-button expand="block" color="tertiary" (click)="takePhoto()">
     <ion-icon slot="start" name="camera"></ion-icon>
     Prendre une photo
