@@ -1,9 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cropTest</ion-title>
+    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header>
     <ion-toolbar>
@@ -11,26 +10,14 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-button expand="block" color="tertiary" (click)="pickImage(sourceType)">
-  <ion-icon slot="start" name="camera"></ion-icon>
-  Prendre une photo
-</ion-button>
-  <!-- C'est ici que s'afficherala photo -->
-<ion-card *ngIf="base64Image!= null" class="result">
-
-  <img class="result-content" [src]="base64Image">
-
-</ion-card>
-</ion-content>
-<ion-content>
-  <ion-button expand="block" color="tertiary" (click)="cropImage(fileUrl)">
+  <ion-button expand="block" color="tertiary" (click)="selectImage()">
     <ion-icon slot="start" name="camera"></ion-icon>
-    test cropping
+    select image
   </ion-button>
   <!-- C'est ici que s'afficherala photo -->
-  <ion-card *ngIf="fileUrl!= null" class="result">
+  <ion-card *ngIf="croppedImagepath!= null" class="result">
 
-    <img class="result-content" [src]="fileUrl">
+    <img class="result-content" [src]="croppedImagepath">
 
   </ion-card>
 </ion-content>

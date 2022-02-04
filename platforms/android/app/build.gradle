@@ -294,8 +294,9 @@ dependencies {
 
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
-    implementation "androidx.annotation:annotation:1.1.0"
     implementation "androidx.core:core:1.6.+"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "com.soundcloud.android:android-crop:1.0.0@aar"
     // SUB-PROJECT DEPENDENCIES END
 }
 

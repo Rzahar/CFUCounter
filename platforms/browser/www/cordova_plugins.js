@@ -282,6 +282,14 @@ module.exports = [
         "id": "cordova-plugin-camera.CameraProxy",
         "pluginId": "cordova-plugin-camera",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-crop/www/crop.js",
+        "id": "cordova-plugin-crop.CropPlugin",
+        "pluginId": "cordova-plugin-crop",
+        "clobbers": [
+            "plugins.crop"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -296,7 +304,8 @@ module.exports.metadata =
     "cordova-plugin-ionic-webview": "4.2.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-camera": "6.0.0"
+    "cordova-plugin-camera": "6.0.0",
+    "cordova-plugin-crop": "0.3.1"
 }
 // BOTTOM OF METADATA
 });

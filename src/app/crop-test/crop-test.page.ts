@@ -10,16 +10,15 @@ import { File } from '@ionic-native/file/ngx';
   styleUrls: ['./crop-test.page.scss'],
 })
 export class CropTestPage implements OnInit {
+
   croppedImagepath = "";
   isLoading = false;
-
+  sourceType: any;
   imagePickerOptions = {
     maximumImagesCount: 1,
     quality: 50
   };
-  base64Image: null;
-  sourceType: any;
-  fileUrl: any;
+
 
   constructor(
     private camera: Camera,
@@ -40,7 +39,7 @@ export class CropTestPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.cropImage(imageData)
     }, (err) => {
       // Handle error
@@ -49,21 +48,21 @@ export class CropTestPage implements OnInit {
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
+      header: "Choisir la source:",
       buttons: [{
-        text: 'Load from Library',
+        text: 'Depuis la galerie photo',
         handler: () => {
           this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
         }
       },
         {
-          text: 'Use Camera',
+          text: ' Utiliser l\'appareil photo',
           handler: () => {
             this.pickImage(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Annuler',
           role: 'cancel'
         }
       ]
@@ -72,13 +71,13 @@ export class CropTestPage implements OnInit {
   }
 
   cropImage(fileUrl) {
-    this.crop.crop(fileUrl, { quality: 50 })
+    this.crop.crop(fileUrl, { quality:100 })
       .then(
         newPath => {
           this.showCroppedImage(newPath.split('?')[0])
         },
         error => {
-          alert('Error cropping image' + error);
+          alert('Error Cropping image' + error);
         }
       );
   }

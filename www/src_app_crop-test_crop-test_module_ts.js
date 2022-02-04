@@ -90,22 +90,110 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CropTestPage": () => (/* binding */ CropTestPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _C_Workspace_Projet_CounterCFU_node_modules_ngtools_webpack_src_loaders_direct_resource_js_crop_test_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./crop-test.page.html */ 5058);
 /* harmony import */ var _crop_test_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crop-test.page.scss */ 5694);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/crop/ngx */ 4069);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @awesome-cordova-plugins/camera/ngx */ 692);
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/file/ngx */ 7498);
+
+
+
+
 
 
 
 
 let CropTestPage = class CropTestPage {
-    constructor() { }
+    constructor(camera, crop, actionSheetController, file) {
+        this.camera = camera;
+        this.crop = crop;
+        this.actionSheetController = actionSheetController;
+        this.file = file;
+        this.croppedImagepath = "";
+        this.isLoading = false;
+        this.imagePickerOptions = {
+            maximumImagesCount: 1,
+            quality: 50
+        };
+    }
+    pickImage(sourceType) {
+        const options = {
+            quality: 100,
+            sourceType: sourceType,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            // let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.cropImage(imageData);
+        }, (err) => {
+            // Handle error
+        });
+    }
+    selectImage() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const actionSheet = yield this.actionSheetController.create({
+                header: "Choisir la source:",
+                buttons: [{
+                        text: 'Depuis la galerie photo',
+                        handler: () => {
+                            this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+                        }
+                    },
+                    {
+                        text: ' Utiliser l\'appareil photo',
+                        handler: () => {
+                            this.pickImage(this.camera.PictureSourceType.CAMERA);
+                        }
+                    },
+                    {
+                        text: 'Annuler',
+                        role: 'cancel'
+                    }
+                ]
+            });
+            yield actionSheet.present();
+        });
+    }
+    cropImage(fileUrl) {
+        this.crop.crop(fileUrl, { quality: 100 })
+            .then(newPath => {
+            this.showCroppedImage(newPath.split('?')[0]);
+        }, error => {
+            alert('Error cropping image' + error);
+        });
+    }
+    showCroppedImage(ImagePath) {
+        this.isLoading = true;
+        var copyPath = ImagePath;
+        var splitPath = copyPath.split('/');
+        var imageName = splitPath[splitPath.length - 1];
+        var filePath = ImagePath.split(imageName)[0];
+        this.file.readAsDataURL(filePath, imageName).then(base64 => {
+            this.croppedImagepath = base64;
+            this.isLoading = false;
+        }, error => {
+            alert('Error in showing image' + error);
+            this.isLoading = false;
+        });
+    }
     ngOnInit() {
     }
 };
-CropTestPage.ctorParameters = () => [];
-CropTestPage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+CropTestPage.ctorParameters = () => [
+    { type: _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_3__.Camera },
+    { type: _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_2__.Crop },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ActionSheetController },
+    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__.File }
+];
+CropTestPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-crop-test',
         template: _C_Workspace_Projet_CounterCFU_node_modules_ngtools_webpack_src_loaders_direct_resource_js_crop_test_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_crop_test_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -126,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>cropTest</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content [fullscreen]=\"true\">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    select image\n  </ion-button>\n  <!-- C'est ici que s'afficherala photo -->\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\n\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\n\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -136,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjcm9wLXRlc3QucGFnZS5zY3NzIn0= */";
+module.exports = ".container {\n  max-width: 640px;\n  margin: 20px auto;\n}\n\nimg {\n  max-width: 100%;\n}\n\n.cropper-view-box,\n.cropper-face {\n  border-radius: 50%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNyb3AtdGVzdC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBQTtFQUNBLGlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxlQUFBO0FBQ0Y7O0FBRUE7O0VBRUUsa0JBQUE7QUFDRiIsImZpbGUiOiJjcm9wLXRlc3QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XHJcbiAgbWF4LXdpZHRoOiA2NDBweDtcclxuICBtYXJnaW46IDIwcHggYXV0bztcclxufVxyXG5cclxuaW1nIHtcclxuICBtYXgtd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbi5jcm9wcGVyLXZpZXctYm94LFxyXG4uY3JvcHBlci1mYWNlIHtcclxuICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbn1cclxuIl19 */";
 
 /***/ })
 
