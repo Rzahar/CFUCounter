@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CropCircularComponent } from './crop-circular.component';
+import { CropCircularPage } from './crop-circular.page';
 
-describe('CropCircularComponent', () => {
-  let component: CropCircularComponent;
-  let fixture: ComponentFixture<CropCircularComponent>;
+describe('CropCircularPage', () => {
+  let component: CropCircularPage;
+  let fixture: ComponentFixture<CropCircularPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CropCircularComponent ],
+      declarations: [ CropCircularPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CropCircularComponent);
+    fixture = TestBed.createComponent(CropCircularPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

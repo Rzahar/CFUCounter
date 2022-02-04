@@ -18,10 +18,15 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },  {
+  },
+  {
     path: 'crop-test',
     loadChildren: () => import('./crop-test/crop-test.module').then( m => m.CropTestPageModule)
+  },  {
+    path: 'crop-circular',
+    loadChildren: () => import('./crop-circular/crop-circular.module').then( m => m.CropCircularPageModule)
   },
+
 
 ];
 
