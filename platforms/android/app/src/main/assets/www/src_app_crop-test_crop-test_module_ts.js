@@ -166,7 +166,7 @@ let CropTestPage = class CropTestPage {
             .then(newPath => {
             this.showCroppedImage(newPath.split('?')[0]);
         }, error => {
-            alert('Error cropping image' + error);
+            alert('Error Cropping image' + error);
         });
     }
     showCroppedImage(ImagePath) {
