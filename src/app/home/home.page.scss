@@ -50,3 +50,13 @@ img {
 .cropper-face {
   border-radius: 50%;
 }
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  padding: 10px;
+  background-color: lightblue;
+}

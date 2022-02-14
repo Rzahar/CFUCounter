@@ -43,6 +43,10 @@ const routes = [
         path: 'crop-circular',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_crop-circular_crop-circular_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./crop-circular/crop-circular.module */ 3325)).then(m => m.CropCircularPageModule)
     },
+    {
+        path: 'cropandroid',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_cropandroid_cropandroid_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./cropandroid/cropandroid.module */ 7473)).then(m => m.CropandroidPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

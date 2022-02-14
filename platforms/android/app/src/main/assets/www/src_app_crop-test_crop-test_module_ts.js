@@ -164,6 +164,7 @@ let CropTestPage = class CropTestPage {
     cropImage(fileUrl) {
         this.crop.crop(fileUrl, { quality: 100 })
             .then(newPath => {
+            alert('newPath.split:' + newPath.split('?')[0]);
             this.showCroppedImage(newPath.split('?')[0]);
         }, error => {
             alert('Error Cropping image' + error);
@@ -214,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content [fullscreen]=\"true\">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    select image\n  </ion-button>\n  <!-- C'est ici que s'afficherala photo -->\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\n\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\n\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content [fullscreen]=\"true\">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    select image\n  </ion-button>\n  <!-- C'est ici que s'afficherala photo -->\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\n\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\n\n  </ion-card>\n  </ion-content>\n");
 
 /***/ }),
 
