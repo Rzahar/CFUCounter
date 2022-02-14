@@ -9,10 +9,20 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
+import { AuthModule } from './auth/auth.module';
+
+import { IonicStorageModule } from '@ionic/storage';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    AuthModule,
+    IonicStorageModule.forRoot()
+  ],
   providers: [Camera, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
