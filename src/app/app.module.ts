@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { IonicStorageModule } from '@ionic/storage';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,7 +22,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(), 
     AppRoutingModule,
     AuthModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(), 
   ],
   providers: [Camera, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
