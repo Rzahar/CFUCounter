@@ -48,13 +48,8 @@ export class CropTestPage implements OnInit {
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
-      header: "Choisir la source:",
-      buttons: [{
-        text: 'Depuis la galerie photo',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
+      header: "Mode cropping :",
+      buttons: [
         {
           text: ' Utiliser l\'appareil photo',
           handler: () => {
