@@ -139,13 +139,8 @@ let CropTestPage = class CropTestPage {
     selectImage() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const actionSheet = yield this.actionSheetController.create({
-                header: "Choisir la source:",
-                buttons: [{
-                        text: 'Depuis la galerie photo',
-                        handler: () => {
-                            this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-                        }
-                    },
+                header: "Mode cropping :",
+                buttons: [
                     {
                         text: ' Utiliser l\'appareil photo',
                         handler: () => {
@@ -215,7 +210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content [fullscreen]=\"true\">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\n    select image\n  </ion-button>\n  <!-- C'est ici que s'afficherala photo -->\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\n\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\n\n  </ion-card>\n  </ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-header>\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    Choisir une image\r\n  </ion-button>\r\n  <!-- C'est ici que s'afficherala photo -->\r\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\r\n\r\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\r\n\r\n  </ion-card>\r\n  </ion-content>\r\n");
 
 /***/ }),
 

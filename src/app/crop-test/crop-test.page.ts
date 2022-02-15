@@ -69,7 +69,6 @@ export class CropTestPage implements OnInit {
     this.crop.crop(fileUrl, { quality:100 })
       .then(
         newPath => {
-          alert('newPath.split:' + newPath.split('?')[0]);
           this.showCroppedImage(newPath.split('?')[0]);
 
         },

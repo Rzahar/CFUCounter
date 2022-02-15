@@ -22,15 +22,7 @@ const routes: Routes = [
   {
     path: 'crop-test',
     loadChildren: () => import('./crop-test/crop-test.module').then( m => m.CropTestPageModule)
-  },  {
-    path: 'crop-circular',
-    loadChildren: () => import('./crop-circular/crop-circular.module').then( m => m.CropCircularPageModule)
   },
-  {
-    path: 'cropandroid',
-    loadChildren: () => import('./cropandroid/cropandroid.module').then( m => m.CropandroidPageModule)
-  },
-
 
 ];
 
