@@ -13,17 +13,13 @@
       <button [routerLink]="['/']">Accueil </button><br>
       <button [routerLink]="['/login']">Login </button><br>
       <button [routerLink]="['/register']">Register </button><br>
-      <button [routerLink]="['/crop-test']">Page de test pour le Crop </button> <br>
     </nav>
     <hr>
     <ion-toolbar>
       <ion-title size="large">Que voulez-vous faire ? </ion-title>
     </ion-toolbar>
   </ion-header>
-
-
-
-  <ion-button expand="block" color="tertiary" (click)="takePhoto()">
+  <ion-button expand="block" color="tertiary" (click)="selectImage()">
     <ion-icon slot="start" name="camera"></ion-icon>
     Prendre une photo
   </ion-button>
@@ -31,7 +27,6 @@
     <ion-icon slot="start" name="image"></ion-icon>
     Ouvrir la bibliotheque
   </ion-button>
-
   <!-- C'est ici que s'afficherala photo -->
   <ion-card *ngIf="base64Image!= null" class="result">
 

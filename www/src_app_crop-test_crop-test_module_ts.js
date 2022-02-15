@@ -130,7 +130,7 @@ let CropTestPage = class CropTestPage {
         this.camera.getPicture(options).then((imageData) => {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64 (DATA_URL):
-            // let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.base64Image = 'data:image/jpeg;base64,' + imageData;
             this.cropImage(imageData);
         }, (err) => {
             // Handle error
@@ -159,7 +159,6 @@ let CropTestPage = class CropTestPage {
     cropImage(fileUrl) {
         this.crop.crop(fileUrl, { quality: 100 })
             .then(newPath => {
-            alert('newPath.split:' + newPath.split('?')[0]);
             this.showCroppedImage(newPath.split('?')[0]);
         }, error => {
             alert('Error Cropping image' + error);
@@ -172,11 +171,32 @@ let CropTestPage = class CropTestPage {
         var imageName = splitPath[splitPath.length - 1];
         var filePath = ImagePath.split(imageName)[0];
         this.file.readAsDataURL(filePath, imageName).then(base64 => {
-            this.croppedImagepath = base64;
+            this.base64Image = base64;
             this.isLoading = false;
         }, error => {
             alert('Error in showing image' + error);
             this.isLoading = false;
+        });
+    }
+    openLibrary() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            /**
+             * Fonction spécifique dédiée à la récupération de l'image en bibliothèque via sourceType:This.camera.PictureSourceType.PHOTOLIBRARY
+             */
+            const options = {
+                quality: 100,
+                destinationType: this.camera.DestinationType.DATA_URL,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+            };
+            this.camera.getPicture(options).then((imageData) => {
+                // imageData is either a base64 encoded string or a file URI
+                // If it's base64 (DATA_URL):
+                this.base64Image = 'data:image/jpeg;base64,' + imageData;
+            }, (err) => {
+                // Handle error
+            });
         });
     }
     ngOnInit() {
@@ -210,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Page de cropping -- PAGE DE TEST -- </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-header>\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    Choisir une image\r\n  </ion-button>\r\n  <!-- C'est ici que s'afficherala photo -->\r\n  <ion-card *ngIf=\"croppedImagepath!= null\" class=\"result\">\r\n\r\n    <img class=\"result-content\" [src]=\"croppedImagepath\">\r\n\r\n  </ion-card>\r\n  </ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Page de cropping </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-header>\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    Choisir une image\r\n  </ion-button>\r\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\r\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\r\n    Ouvrir la bibliotheque\r\n  </ion-button>\r\n  <!-- C'est ici que s'afficherala photo -->\r\n  <ion-card *ngIf=\"base64Image!= null\" class=\"result\">\r\n\r\n    <img class=\"result-content\" [src]=\"base64Image\">\r\n\r\n  </ion-card>\r\n  <ion-card>\r\n    <img class=\"result-content\" [src]=\"base64Image\">\r\n\r\n  </ion-card>\r\n  </ion-content>\r\n");
 
 /***/ }),
 

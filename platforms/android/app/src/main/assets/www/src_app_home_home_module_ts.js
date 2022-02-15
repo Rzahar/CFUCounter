@@ -90,47 +90,96 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _C_Workspace_Projet_CounterCFU_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./home.page.html */ 2056);
 /* harmony import */ var _home_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.scss */ 968);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @awesome-cordova-plugins/camera/ngx */ 692);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/crop/ngx */ 4069);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @awesome-cordova-plugins/camera/ngx */ 692);
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/file/ngx */ 7498);
+
+
+
 
 
 
 
 
 let HomePage = class HomePage {
-    //constructeur camera nécessaire pour faire fonctionner l'appareil photo/librairie
-    constructor(camera) {
+    constructor(camera, crop, actionSheetController, file) {
         this.camera = camera;
+        this.crop = crop;
+        this.actionSheetController = actionSheetController;
+        this.file = file;
+        this.croppedImagepath = "";
+        this.isLoading = false;
+        this.imagePickerOptions = {
+            maximumImagesCount: 1,
+            quality: 50
+        };
     }
-    takePhoto() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            /**
-             * Fonction spécifique dédiée à la prise de photo via sourceType:this.camera.PictureSourceType.CAMERA
-             */
-            const options = {
-                //Fonctions natives de CameraOption
-                quality: 100,
-                destinationType: this.camera.DestinationType.DATA_URL,
-                encodingType: this.camera.EncodingType.JPEG,
-                mediaType: this.camera.MediaType.PICTURE,
-                sourceType: this.camera.PictureSourceType.CAMERA,
-                // On ajoute l'option savetophotoalbum afin que l'utilisateur puisse garder la trace de la photo s'il souhaite la reconsulter
-                saveToPhotoAlbum: true,
-            };
-            this.camera.getPicture(options).then((imageData) => {
-                // imageData is either a base64 encoded string or a file URI
-                // If it's base64 (DATA_URL):
-                this.base64Image = 'data:image/jpeg;base64,' + imageData;
-            }, (err) => {
-                // Handle error
+    pickImage(sourceType) {
+        const options = {
+            quality: 100,
+            sourceType: sourceType,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            this.base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.cropImage(imageData);
+        }, (err) => {
+            // Handle error
+        });
+    }
+    selectImage() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const actionSheet = yield this.actionSheetController.create({
+                header: "Mode cropping :",
+                buttons: [
+                    {
+                        text: ' Utiliser l\'appareil photo',
+                        handler: () => {
+                            this.pickImage(this.camera.PictureSourceType.CAMERA);
+                        }
+                    },
+                    {
+                        text: 'Annuler',
+                        role: 'cancel'
+                    }
+                ]
             });
+            yield actionSheet.present();
+        });
+    }
+    cropImage(fileUrl) {
+        this.crop.crop(fileUrl, { quality: 100 })
+            .then(newPath => {
+            this.showCroppedImage(newPath.split('?')[0]);
+        }, error => {
+            alert('Error Cropping image' + error);
+        });
+    }
+    showCroppedImage(ImagePath) {
+        this.isLoading = true;
+        var copyPath = ImagePath;
+        var splitPath = copyPath.split('/');
+        var imageName = splitPath[splitPath.length - 1];
+        var filePath = ImagePath.split(imageName)[0];
+        this.file.readAsDataURL(filePath, imageName).then(base64 => {
+            this.base64Image = base64;
+            this.isLoading = false;
+        }, error => {
+            alert('Error in showing image' + error);
+            this.isLoading = false;
         });
     }
     openLibrary() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             /**
              * Fonction spécifique dédiée à la récupération de l'image en bibliothèque via sourceType:This.camera.PictureSourceType.PHOTOLIBRARY
              */
@@ -150,12 +199,17 @@ let HomePage = class HomePage {
             });
         });
     }
+    ngOnInit() {
+    }
 };
 HomePage.ctorParameters = () => [
-    { type: _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_2__.Camera }
+    { type: _awesome_cordova_plugins_camera_ngx__WEBPACK_IMPORTED_MODULE_3__.Camera },
+    { type: _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_2__.Crop },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ActionSheetController },
+    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__.File }
 ];
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-home',
         template: _C_Workspace_Projet_CounterCFU_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_home_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -176,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title class=\"content\" >\r\n      CFU-Counter v.0.1\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content  [fullscreen]=\"true\">\r\n  <ion-header>\r\n    <hr>\r\n    <nav>\r\n      <button [routerLink]=\"['/']\">Accueil </button><br>\r\n      <button [routerLink]=\"['/login']\">Login </button><br>\r\n      <button [routerLink]=\"['/register']\">Register </button><br>\r\n      <button [routerLink]=\"['/crop-test']\">Page de test pour le Crop </button> <br>\r\n    </nav>\r\n    <hr>\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n\r\n\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"takePhoto()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    Prendre une photo\r\n  </ion-button>\r\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\r\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\r\n    Ouvrir la bibliotheque\r\n  </ion-button>\r\n\r\n  <!-- C'est ici que s'afficherala photo -->\r\n  <ion-card *ngIf=\"base64Image!= null\" class=\"result\">\r\n\r\n    <img class=\"result-content\" [src]=\"base64Image\">\r\n\r\n  </ion-card>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title class=\"content\" >\r\n      CFU-Counter v.0.1\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content  [fullscreen]=\"true\">\r\n  <ion-header>\r\n    <hr>\r\n    <nav>\r\n      <button [routerLink]=\"['/']\">Accueil </button><br>\r\n      <button [routerLink]=\"['/login']\">Login </button><br>\r\n      <button [routerLink]=\"['/register']\">Register </button><br>\r\n      <button [routerLink]=\"['/crop-test']\">Page de test pour le Crop </button> <br>\r\n    </nav>\r\n    <hr>\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Que voulez-vous faire ? </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"selectImage()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    Prendre une photo\r\n  </ion-button>\r\n  <ion-button expand=\"block\" color=\"primary\" (click)=\"openLibrary()\">\r\n    <ion-icon slot=\"start\" name=\"image\"></ion-icon>\r\n    Ouvrir la bibliotheque\r\n  </ion-button>\r\n  <!-- C'est ici que s'afficherala photo -->\r\n  <ion-card *ngIf=\"base64Image!= null\" class=\"result\">\r\n\r\n    <img class=\"result-content\" [src]=\"base64Image\">\r\n\r\n  </ion-card>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
