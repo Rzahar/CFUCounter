@@ -10,26 +10,26 @@
   <ion-header>
     <hr>
     <nav>
-      <button [routerLink]="['/']">Accueil </button><br>
+      <button [routerLink]="['/']">Home </button><br>
       <button [routerLink]="['/login']">Login </button><br>
       <button [routerLink]="['/register']">Register </button><br>
     </nav>
     <hr>
     <ion-toolbar>
-      <ion-title size="large">Que voulez-vous faire ? </ion-title>
+      <ion-title size="large">What do you want to do ? </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-button expand="block" color="tertiary" (click)="selectImage()">
     <ion-icon slot="start" name="camera"></ion-icon>
-    Prendre une photo
+    Take photo
   </ion-button>
   <ion-button expand="block" color="primary" (click)="openLibrary()">
     <ion-icon slot="start" name="image"></ion-icon>
-    Ouvrir la bibliotheque
+    Open library
   </ion-button>
   <!-- C'est ici que s'afficherala photo -->
   <ion-card *ngIf="base64Image!= null" class="result">
-
+    <ion-title> Number of CFU : 55 </ion-title>
     <img class="result-content" [src]="base64Image">
 
   </ion-card>
