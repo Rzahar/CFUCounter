@@ -1,31 +1,30 @@
 <ion-header>
   <ion-toolbar >
-    <ion-title class="background">Page de connexion </ion-title>
+    <ion-title class="background">Connexion</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
+  <form [formGroup]="formulaire" (submit)="submitLogin2()">
     <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" id="username"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input type="password" formControlName="password" id="password"></ion-input>
     </ion-item>
-
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" expand="block">Me connecter</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Mot de passe oublié?</a>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/register']" type="submit" color="danger" expand="block">M'inscrire</ion-button>
+        <ion-button type="submit" color="primary" expand="block">Connect</ion-button>
       </ion-col>
     </ion-row>
   </form>
+  <!-- <ion-row>
+    <ion-col>
+      <a [routerLink]="['/forgot-password']" class="small-text">Forgotten password</a>
+      <ion-button [routerLink]="['/register']" type="submit" color="danger" expand="block">Register</ion-button>
+    </ion-col>
+  </ion-row> -->
 </ion-content>

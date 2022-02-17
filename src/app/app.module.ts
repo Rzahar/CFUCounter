@@ -12,8 +12,11 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthModule } from './auth/auth.module';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
+export function tokenGetter(): string | null {
+  return localStorage.getItem('jwt_token')
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +25,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(), 
     AppRoutingModule,
     AuthModule,
-    IonicStorageModule.forRoot(), 
+    IonicStorageModule.forRoot()
   ],
   providers: [Camera, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

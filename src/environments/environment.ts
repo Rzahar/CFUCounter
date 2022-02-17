@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  AUTH_SERVER_ADRESS: 'http://localhost:8080'
+  AUTH_SERVER_ADRESS: 'http://localhost:8080',
+  register_uri: 'http://localhost:8080/api/register'
 
 };
 
