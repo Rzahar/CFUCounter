@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  AUTH_SERVER_ADRESS: 'http://localhost:8080',
-  register_uri: 'http://localhost:8080/api/register'
-
+  AUTH_SERVER_ADRESS: 'https://auth-cufc.azurewebsites.net/',
+  register_uri: 'https://auth-cufc.azurewebsites.net/api/register'
 };
 
 /*

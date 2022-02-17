@@ -27,7 +27,13 @@ export class HomePage implements OnInit {
   ) { }
 
   pickImage(sourceType) {
+    /**
+     * This function is used for taking photos
+     */
     const options: CameraOptions = {
+      /**
+       * Natives variables from the CameraModule in Ionic
+       */
       quality: 100,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -35,8 +41,8 @@ export class HomePage implements OnInit {
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
+      // imageData est soit encodée en base64 soit en URI (si Ios)
+      // Ici, on est sous Android donc on est en base64 (DATA_URL):
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
       this.cropImage(imageData)
     }, (err) => {
@@ -45,6 +51,9 @@ export class HomePage implements OnInit {
   }
 
   async selectImage() {
+    /**
+     * Function which allow us to use the photo application in phone. Then, is will be used in order to launch the cropping function
+     */
     const actionSheet = await this.actionSheetController.create({
       header: "Cropping mod :",
       buttons: [
@@ -64,6 +73,9 @@ export class HomePage implements OnInit {
   }
 
   cropImage(fileUrl) {
+    /**
+     * Allow us to show a cropped image using his path
+     */
     this.crop.crop(fileUrl, { quality:100 })
       .then(
         newPath => {
@@ -77,6 +89,9 @@ export class HomePage implements OnInit {
   }
 
   showCroppedImage(ImagePath) {
+    /**
+     * Function which allow us to retrieve the cropped photo thanks to base64Image. This variable will be used in html in order to  recover the cropped picture
+     */
     this.isLoading = true;
     var copyPath = ImagePath;
     var splitPath = copyPath.split('/');
@@ -93,7 +108,7 @@ export class HomePage implements OnInit {
   }
   async openLibrary() {
     /**
-     * Fonction spécifique dédiée à la récupération de l'image en bibliothèque via sourceType:This.camera.PictureSourceType.PHOTOLIBRARY
+     * This function will be used in order to retrieve a photo from the phone gallery, then it will be displayed in html thanks to base64Image
      */
     const options: CameraOptions = {
       quality: 100,

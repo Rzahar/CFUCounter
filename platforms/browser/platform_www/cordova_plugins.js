@@ -282,6 +282,26 @@ module.exports = [
         "id": "cordova-plugin-camera.CameraProxy",
         "pluginId": "cordova-plugin-camera",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/node_modules/cordova-sqlite-storage-dependencies/sql-asm-memory-growth.js",
+        "id": "cordova-sqlite-storage.sql",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/src/browser/SQLiteProxy.js",
+        "id": "cordova-sqlite-storage.SQLiteProxy",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -296,7 +316,8 @@ module.exports.metadata =
     "cordova-plugin-ionic-webview": "4.2.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-camera": "6.0.0"
+    "cordova-plugin-camera": "6.0.0",
+    "cordova-sqlite-storage": "6.0.0"
 }
 // BOTTOM OF METADATA
 });

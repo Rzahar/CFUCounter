@@ -15,14 +15,14 @@ export class LoginPage implements OnInit {
 
   user: UserConnection;
   formulaire: FormGroup;
-  
-  
+
+
 
   constructor(private authService: AuthService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) { 
-    
+    private router: Router) {
+
   }
 
 
@@ -34,18 +34,18 @@ export class LoginPage implements OnInit {
 
   }
 
-//   submitLogin() {
-//     let username = this.formulaire.value.username;
-//     let password = this.formulaire.value.password;
+  submitLogin() {
+     let username = this.formulaire.value.username;
+          let password = this.formulaire.value.password;
 
-//     if (username == "user" && password == "user") {
-//       this.router.navigate(['/home'])
+     if (username == "user" && password == "user") {
+      this.router.navigate(['/home'])
 
-//     } else  {
-//       window.alert("Wrong username/password, please retry")
-//     }
-    
-// }
+    } else  {
+       window.alert("Wrong username/password, please retry")
+     }
+
+ }
 
 submitLogin2(): void {
   let username = this.formulaire.value.username;
